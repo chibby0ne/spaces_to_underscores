@@ -42,7 +42,8 @@ for file in ${files}; do
     newfile=$(echo ${file} | sed 's/ \+/_/g')
     if [[ "${file}" != "${newfile}" ]]; then
         changed_something=1
-        mv ${file} ${newfile}
+        # Prepend path + "/", otherwise it will try to rename files in the script's directory
+        mv ${1}"/"${file} ${1}"/"${newfile}
         echo Changed ${file} to ${newfile}
     fi
 done
